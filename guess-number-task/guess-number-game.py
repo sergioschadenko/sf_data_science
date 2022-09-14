@@ -1,5 +1,6 @@
 """Игра угадай число
 Компьютер сам загадывает и сам угадывает число
+менее чем за 20 попыток
 """
 
 import numpy as np
@@ -14,13 +15,23 @@ def random_predict(number: int = 1) -> int:
     Returns:
         int: Число попыток
     """
-    count = 0
-
-    while True:
-        count += 1
-        predict_number = np.random.randint(1, 101)  # предполагаемое число
-        if number == predict_number:
-            break  # выход из цикла если угадали
+    count = 1
+    max = 101
+    min = 1
+    predict_number = np.random.randint(min, max)
+    
+    if number == predict_number:
+        return count
+    else:
+        while number != predict_number:
+            if number < predict_number:
+                max = predict_number
+                predict_number = np.random.randint(min, max)
+                count += 1
+            elif number > predict_number:
+                min = predict_number
+                predict_number = np.random.randint(min, max)
+                count += 1
     return count
 
 
