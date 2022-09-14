@@ -16,22 +16,26 @@ def random_predict(number: int = 1) -> int:
         int: Число попыток
     """
     count = 1
-    max = 101
-    min = 1
-    predict_number = np.random.randint(min, max)
+    max_number = 101
+    min_number = 1
+    predict_number = np.random.randint(min_number, max_number)
     
     if number == predict_number:
         return count
+    
     else:
         while number != predict_number:
+            # Задаем число, если предполгаемое число больше заданного.
             if number < predict_number:
-                max = predict_number
-                predict_number = np.random.randint(min, max)
+                max_number = predict_number
+                predict_number = np.random.randint(min_number, max_number)
                 count += 1
+            # Задаем число, если предполгаемое число меньше заданного.
             elif number > predict_number:
-                min = predict_number
-                predict_number = np.random.randint(min, max)
+                min_number = predict_number
+                predict_number = np.random.randint(min_number, max_number)
                 count += 1
+                
     return count
 
 
